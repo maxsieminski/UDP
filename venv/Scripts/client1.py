@@ -2,20 +2,21 @@ import socket
 
 # Create a UDP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_address = ('192.168.8.112', 5000)
+sock.bind = (('', 15200))
 buffer_size = 4096
+m = sock.recvfrom(buffer_size)
+server_address = m[1]
 
 
 while True:
-
     bytesToSend = input('Wprowadz liczbe: ')
-
-    if(bytesToSend == 69420):
-        exit()
-
     sock.sendto(bytesToSend.encode(), server_address)
 
-    msgFromServer = sock.recvfrom(buffer_size)
+    try:
+        msgFromServer = sock.recvfrom(buffer_size)
+    except ConnectionResetError:
+        print('Nie udało się połączyć z serwerem :(')
+        exit()
 
     msg = ('Odpowiedz od serwera: ', msgFromServer[0])
     print(msg)
