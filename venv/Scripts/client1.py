@@ -13,7 +13,9 @@ def print_help():
     print('"dodawanie" [liczba1] [liczba2] [liczba3] - serwer oblicza sumę trzech liczb\n'
           '"odejmowanie" [liczba1] [liczba2] [liczba3] - serwer oblicza różnicę trzech liczb\n'
           '"mnozenie" [liczba1] [liczba2] [liczba3] - serwer oblicza iloczyn trzech liczb\n'
-          '"dzielenie" [liczba1] [liczba2] [liczba3] - serwer oblicza iloraz trzech liczb\n')
+          '"dzielenie" [liczba1] [liczba2] [liczba3] - serwer oblicza iloraz trzech liczb\n'
+          '"exit" - zakończenie programu klienta\n'
+          '"terminate" - zdalne wyłączenie serwera')
 
 
 if __name__ == "__main__":
@@ -33,7 +35,7 @@ if __name__ == "__main__":
 
         elif message == 'terminate':
             client.sendto(message.encode(), server_address)
-            print("Wylaczono serwer")
+            print("Wylaczono serwer\nWyłączanie klienta...")
             exit(0)
 
         else:
