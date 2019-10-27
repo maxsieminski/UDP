@@ -2,13 +2,25 @@ import socket
 import re
 import time
 
-
 def encode_msg(user_input):
-    li = re.findall(r"[\w]+", user_input) # nwm czy potrzebne, ale okej - eliminuje z inputu #$@&
+    li = re.findall(r"[\w]+", user_input)
+
+    print(li[0])
     try:
-        # TODO: dodac opcje wpisywania tylko sumowanie i jedna liczba
-        message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2], '@',
-                   'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@']
+        if li[0].isnumeric():
+            message = ["oper", '#', 'sum_add', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
+                       str(int(time.time())), '@']
+        elif li[0] == "koniecsumowania":
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@']
+
+        elif li[0] == "sumowanie":
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'time', '#',
+                       str(int(time.time())), '@']
+
+        elif li[0] == "dodawanie" or "odejmowanie" or "mnozenie" or "dzielenie":
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
+                       '@','numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@']
+
     except IndexError:
         # musi byc w formatce #@ zeby nie wywalalo - jako operacja: lipens
         message = ["oper", '#', 'lipens', '@', "stat", '#', "null", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
@@ -19,7 +31,10 @@ def encode_msg(user_input):
 # TODO: dodac dekodowanie wiadomosci z postaci OD#liczba@ (regex?)
 def decode_message(server_answer):
     li = re.findall(r"[\w]+", server_answer)
-    return "Wynikiem operacji jest: " + li[1]
+    if li[1] == 'lipa':
+        return "Niepoprawny nagłówek mordzia"
+    else:
+        return "Wynikiem operacji jest: " + li[1]
 
 
 
