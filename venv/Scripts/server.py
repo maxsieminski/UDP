@@ -30,19 +30,24 @@ def run_operations(client_message):
         result = int(li[6]) / int(li[8]) / int(li[10])
         return 'OD#%s@' % result
 
-    elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == 'numb':
         result = sigma(li[6])
         return 'OD#%s@' % result
 
-    # TODO: if'y dla pojedynczych wartosci (np. input = 1) przy sumowaniu
-    # i funkcje na return wartosci sigmy (np. koniecsumowania)
+    elif li[1] == 'oper' and li[2] == 'sum_add' and li[3] == 'stat' and li[5] == 'numb':
+        result = sigma(li[6])
+        return 'OD#%s@' % result
 
+    elif li[1] == 'oper' and li[2] == 'koniecsumowania':
+        result = sigma(0)
+        given_list.clear()
+        return 'OD#%s@' % result
 
     elif li[1] == 'oper' and li[2] == 'lipa' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
-        return 'Niepoprawny naglowek :0'
+        return 'OD#lipa@'
 
     else:
-        return 'Niepoprawny naglowek!'
+        return 'OD#lipa@'
 
 
 class UDP(socketserver.BaseRequestHandler):
