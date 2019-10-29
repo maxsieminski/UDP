@@ -51,10 +51,10 @@ def run_operations(client_message):
 
     elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         czas = li[12]
-        return 'oper#null@stat#ok@numb#0@time#%s@'
+        return 'oper#null@stat#failed@numb#0@time#%s@'
 
     else:
-        return 'oper#null@stat#ok@numb#0@'
+        return 'oper#null@stat#failed@numb#0@'
 
 
 class UDP(socketserver.BaseRequestHandler):

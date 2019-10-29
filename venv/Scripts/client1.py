@@ -20,8 +20,8 @@ def encode_msg(user_input):
                        '@','numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@']
 
     except IndexError:
-        # musi byc w formatce #@ zeby nie wywalalo - jako operacja: lipens
-        message = ["oper", '#', 'null', '@', "stat", '#', "null", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
+        # musi byc w formatce #@ zeby nie wywalalo - jako operacja: null
+        message = ["oper", '#', 'null', '@', "stat", '#', "failed", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
                    'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@']
     message = ''.join(message)
     return message
