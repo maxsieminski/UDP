@@ -21,6 +21,7 @@ def run_operations(client_message):
 
     elif li[1] == 'oper' and li[2] == 'mnozenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) * int(li[8]) * int(li[10])
+        czas = li[12]
         return 'oper#mnozenie@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'odejmowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
@@ -47,7 +48,7 @@ def run_operations(client_message):
         result = sigma(0)
         given_list.clear()
         czas = li[12]
-        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % result
+        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         czas = li[12]
