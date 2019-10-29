@@ -1,8 +1,9 @@
 import socketserver
 import time
 import re
-
+client_list = []
 given_list = []
+
 def sigma(given_num):
     given_num = int(given_num)
     given_list.append(given_num)
@@ -21,6 +22,7 @@ def run_operations(client_message):
 
     elif li[1] == 'oper' and li[2] == 'mnozenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) * int(li[8]) * int(li[10])
+        czas = li[12]
         return 'oper#mnozenie@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'odejmowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
@@ -47,11 +49,11 @@ def run_operations(client_message):
         result = sigma(0)
         given_list.clear()
         czas = li[12]
-        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % result
+        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         czas = li[12]
-        return 'oper#null@stat#failed@numb#0@time#%s@'
+        return 'oper#null@stat#failed@numb#0@time#%s@' % czas
 
     else:
         return 'oper#null@stat#failed@numb#0@'
@@ -62,6 +64,12 @@ class UDP(socketserver.BaseRequestHandler):
         msg_from_client = self.request[0].strip()
         socket = self.request[1]
         client_add = self.client_address[0]
+        # sprawdzanie czy był już nawiązany kontakt z danym ip
+        if client_add not in client_list:
+            client_list.append(client_add)
+
+       # len(client_list)+1 --> identyfikator sesji
+
 
         if msg_from_client.decode() == 'terminate':
             print("ZDALNE ZAMKNIECIE SERWERA PRZEZ KLIENTA")
@@ -75,7 +83,7 @@ class UDP(socketserver.BaseRequestHandler):
 
 
 if __name__ == "__main__":
-    server_address = ('172.20.10.4', 15200)
+    server_address = ('127.0.0.1', 15200)
     server_UDP = socketserver.UDPServer(server_address, UDP)
     server_UDP.serve_forever(0.5)
 
