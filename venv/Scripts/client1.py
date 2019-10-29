@@ -2,29 +2,30 @@ import socket
 import re
 import time
 
-def encode_msg(user_input):
+
+def encode_msg(user_input, ssid):
     li = re.findall(r"[\w]+", user_input)
     try:
         if li[0].isnumeric():
             message = ["oper", '#', 'sum_add', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
-                       str(int(time.time())), '@', "ssid", '#', "null", '@']
+                       str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
         elif li[0] == "koniecsumowania":
             message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@',
-                       "ssid", '#', "null", '@']
+                       "ssid", '#', ssid, '@']
 
         elif li[0] == "sumowanie":
             message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'time', '#',
-                       str(int(time.time())), '@', "ssid", '#', "null", '@']
+                       str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
         elif li[0] == "dodawanie" or "odejmowanie" or "mnozenie" or "dzielenie":
             message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
-                       '@', 'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', "null", '@']
+                       '@', 'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
     except IndexError:
         # musi byc w formatce #@ zeby nie wywalalo - jako operacja: null
         message = ["oper", '#', 'null', '@', "stat", '#', "failed", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
-                   'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', "null", '@']
+                   'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
     message = ''.join(message)
     return message
 
@@ -36,6 +37,10 @@ def decode_message(server_answer):
     else:
         return "Wynikiem operacji " + li[1] + " jest: " + li[5]
 
+
+def get_ssid(server_answer):
+    li = re.findall(r"[\w]+", server_answer)
+    return li[9]
 
 
 def print_help():
@@ -49,7 +54,7 @@ def print_help():
 
 if __name__ == "__main__":
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    # server_address = ('127.0.0.1', 15200)
+    ssid = "null"
     server_address = ('127.0.0.1', 15200)
 
     client.settimeout(5)
@@ -71,12 +76,12 @@ if __name__ == "__main__":
 
         else:
             print("Wysylam...", end='')
-            client.sendto(encode_msg(message).encode(), server_address)
+            client.sendto(encode_msg(message, ssid).encode(), server_address)
             print("...", end='')
 
         try:
             server_response = client.recvfrom(1024)
-
+            ssid = get_ssid(server_response[0].decode())
             decoded  = decode_message(server_response[0].decode())
             print("\nOdpowiedź od serwera :", decoded)
 

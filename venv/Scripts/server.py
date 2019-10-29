@@ -16,44 +16,68 @@ def run_operations(client_message):
     global session_number
     li = re.findall(r"[\w]+", client_message)
     if li[1] == 'oper' and li[2] == 'dodawanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            li[14] = session_number
+            session_number += 1
         result = int(li[6]) + int(li[8]) + int(li[10])
         czas = li[12]
-        return 'oper#dodawanie@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#dodawanie@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'mnozenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            li[14] = session_number
+            session_number += 1
         result = int(li[6]) * int(li[8]) * int(li[10])
         czas = li[12]
-        return 'oper#mnozenie@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#mnozenie@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'odejmowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            li[14] = session_number
+            session_number += 1
         result = int(li[6]) - int(li[8]) - int(li[10])
         czas = li[12]
-        return 'oper#odejmowanie@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#odejmowanie@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'dzielenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            li[14] = session_number
+            session_number += 1
         result = int(li[6]) / int(li[8]) / int(li[10])
         czas = li[12]
-        return 'oper#dzielenie@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#dzielenie@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == 'numb':
+        if li[10] == "null":
+            li[10] = session_number
+            session_number += 1
         result = sigma(li[6])
         czas = li[8]
-        return 'oper#sumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#sumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'sum_add' and li[3] == 'stat' and li[5] == 'numb':
+        if li[10] == "null":
+            li[10] = session_number
+            session_number += 1
         result = sigma(li[6])
         czas = li[8]
-        return 'oper#sumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#sumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'koniecsumowania':
+        if li[8] == "null":
+            li[8] = session_number
+            session_number += 1
         result = sigma(0)
         given_list.clear()
         czas = li[6]
-        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
+        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
     elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            li[14] = session_number
+            session_number += 1
         czas = li[12]
-        return 'oper#null@stat#failed@numb#0@time#%s@' % czas
+        return 'oper#null@stat#failed@numb#0@time#%s@ssid#%s@' % (result, czas, session_number)
 
     else:
         return 'oper#null@stat#failed@numb#0@'
