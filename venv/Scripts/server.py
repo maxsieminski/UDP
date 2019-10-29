@@ -16,38 +16,45 @@ def run_operations(client_message):
     li = re.findall(r"[\w]+", client_message)
     if li[1] == 'oper' and li[2] == 'dodawanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) + int(li[8]) + int(li[10])
-        return 'oper#dodawanie@stat#ok@numb#%s@' % result
+        czas = li[12]
+        return 'oper#dodawanie@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'mnozenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) * int(li[8]) * int(li[10])
-        return 'oper#mnozenie@stat#ok@numb#%s@' % result
+        return 'oper#mnozenie@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'odejmowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) - int(li[8]) - int(li[10])
-        return 'oper#odejmowanie@stat#ok@numb#%s@' % result
+        czas = li[12]
+        return 'oper#odejmowanie@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'dzielenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) / int(li[8]) / int(li[10])
-        return 'oper#dzielenie@stat#ok@numb#%s@' % result
+        czas = li[12]
+        return 'oper#dzielenie@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == 'numb':
         result = sigma(li[6])
-        return 'oper#sumowania@stat#ok@numb#%s@' % result
+        czas = li[12]
+        return 'oper#sumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'sum_add' and li[3] == 'stat' and li[5] == 'numb':
         result = sigma(li[6])
-        return 'oper#sumowania@stat#ok@numb#%s@' % result
+        czas = li[12]
+        return 'oper#sumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'koniecsumowania':
         result = sigma(0)
         given_list.clear()
-        return 'oper#koniecsumowania@stat#ok@numb#%s@' % result
+        czas = li[12]
+        return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % result
 
-    elif li[1] == 'oper' and li[2] == 'lipa' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
-        return 'oper#lipa@stat#ok@numb#0@'
+    elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        czas = li[12]
+        return 'oper#null@stat#ok@numb#0@time#%s@'
 
     else:
-        return 'oper#lipa@stat#ok@numb#0@'
+        return 'oper#null@stat#ok@numb#0@'
 
 
 class UDP(socketserver.BaseRequestHandler):
