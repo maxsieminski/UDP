@@ -1,12 +1,41 @@
 import socket
 import re
 import time
+
 def encode_msg(user_input):
     li = re.findall(r"[\w]+", user_input)
-    message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2], '@',
-               'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@']
+
+    print(li[0])
+    try:
+        if li[0].isnumeric():
+            message = ["oper", '#', 'sum_add', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
+                       str(int(time.time())), '@']
+        elif li[0] == "koniecsumowania":
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@']
+
+        elif li[0] == "sumowanie":
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'time', '#',
+                       str(int(time.time())), '@']
+
+        elif li[0] == "dodawanie" or "odejmowanie" or "mnozenie" or "dzielenie":
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
+                       '@','numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@']
+
+    except IndexError:
+        # musi byc w formatce #@ zeby nie wywalalo - jako operacja: lipens
+        message = ["oper", '#', 'lipens', '@', "stat", '#', "null", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
+                   'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@']
     message = ''.join(message)
     return message
+
+# TODO: dodac dekodowanie wiadomosci z postaci OD#liczba@ (regex?)
+def decode_message(server_answer):
+    li = re.findall(r"[\w]+", server_answer)
+    if li[1] == 'lipa':
+        return "Niepoprawny nagłówek mordzia"
+    else:
+        return "Wynikiem operacji jest: " + li[1]
+
 
 
 def print_help():
@@ -20,7 +49,9 @@ def print_help():
 
 if __name__ == "__main__":
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # server_address = ('127.0.0.1', 15200)
     server_address = ('127.0.0.1', 15200)
+
     client.settimeout(5)
 
     while True:
@@ -45,6 +76,11 @@ if __name__ == "__main__":
 
         try:
             server_response = client.recvfrom(1024)
-            print("\nOdpowiedź od serwera :", server_response[0].decode())
+
+            decoded  = decode_message(server_response[0].decode())
+            print("\nOdpowiedź od serwera :", decoded)
+
+           # print("\nOdpowiedź od serwera :", server_response[0].decode()) - poprzednia opcja
+
         except socket.timeout:
             print("Serwer nie odpowiedział, sprawdź połączenie")
