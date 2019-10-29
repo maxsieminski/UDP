@@ -4,8 +4,6 @@ import time
 
 def encode_msg(user_input):
     li = re.findall(r"[\w]+", user_input)
-
-    print(li[0])
     try:
         if li[0].isnumeric():
             message = ["oper", '#', 'sum_add', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
@@ -28,13 +26,13 @@ def encode_msg(user_input):
     message = ''.join(message)
     return message
 
-# TODO: dodac dekodowanie wiadomosci z postaci OD#liczba@ (regex?)
+
 def decode_message(server_answer):
     li = re.findall(r"[\w]+", server_answer)
     if li[1] == 'lipa':
-        return "Niepoprawny nagłówek mordzia"
+        return "Niepoprawny nagłówek"
     else:
-        return "Wynikiem operacji jest: " + li[1]
+        return "Wynikiem operacji " + li[1] + " jest: " + li[5]
 
 
 
