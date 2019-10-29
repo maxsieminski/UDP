@@ -7,22 +7,24 @@ def encode_msg(user_input):
     try:
         if li[0].isnumeric():
             message = ["oper", '#', 'sum_add', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
-                       str(int(time.time())), '@']
+                       str(int(time.time())), '@', "ssid", '#', "null", '@']
+
         elif li[0] == "koniecsumowania":
-            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@']
+            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@',
+                       "ssid", '#', "null", '@']
 
         elif li[0] == "sumowanie":
             message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'time', '#',
-                       str(int(time.time())), '@']
+                       str(int(time.time())), '@', "ssid", '#', "null", '@']
 
         elif li[0] == "dodawanie" or "odejmowanie" or "mnozenie" or "dzielenie":
             message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
-                       '@','numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@']
+                       '@', 'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', "null", '@']
 
     except IndexError:
         # musi byc w formatce #@ zeby nie wywalalo - jako operacja: null
         message = ["oper", '#', 'null', '@', "stat", '#', "failed", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
-                   'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@']
+                   'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', "null", '@']
     message = ''.join(message)
     return message
 

@@ -1,19 +1,19 @@
 import socketserver
 import time
 import re
-client_list = []
+session_number = 0
 given_list = []
 
 def sigma(given_num):
     given_num = int(given_num)
     given_list.append(given_num)
-    print(given_list[0])
     suma = sum(given_list)
 
     return suma
 
 
 def run_operations(client_message):
+    global session_number
     li = re.findall(r"[\w]+", client_message)
     if li[1] == 'oper' and li[2] == 'dodawanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
         result = int(li[6]) + int(li[8]) + int(li[10])
@@ -37,18 +37,18 @@ def run_operations(client_message):
 
     elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == 'numb':
         result = sigma(li[6])
-        czas = li[12]
+        czas = li[8]
         return 'oper#sumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'sum_add' and li[3] == 'stat' and li[5] == 'numb':
         result = sigma(li[6])
-        czas = li[12]
+        czas = li[8]
         return 'oper#sumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'koniecsumowania':
         result = sigma(0)
         given_list.clear()
-        czas = li[12]
+        czas = li[6]
         return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@' % (result, czas)
 
     elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
@@ -64,12 +64,6 @@ class UDP(socketserver.BaseRequestHandler):
         msg_from_client = self.request[0].strip()
         socket = self.request[1]
         client_add = self.client_address[0]
-        # sprawdzanie czy był już nawiązany kontakt z danym ip
-        if client_add not in client_list:
-            client_list.append(client_add)
-
-       # len(client_list)+1 --> identyfikator sesji
-
 
         if msg_from_client.decode() == 'terminate':
             print("ZDALNE ZAMKNIECIE SERWERA PRZEZ KLIENTA")
