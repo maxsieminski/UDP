@@ -202,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572369736508</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572370203872</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1572370203872</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">

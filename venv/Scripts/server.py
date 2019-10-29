@@ -4,12 +4,14 @@ import re
 session_number = 0
 given_list = []
 
-def sigma(given_num):
-    given_num = int(given_num)
-    given_list.append(given_num)
-    suma = sum(given_list)
 
-    return suma
+def sigma(given_num, ssid):
+    given_num = int(given_num)
+    if len(given_list) == 0:
+        given_list.append(given_num)
+    else:
+        given_list[int(ssid) - 1] += given_num
+    return given_list[int(ssid) - 1]
 
 
 def run_operations(client_message):
@@ -51,7 +53,7 @@ def run_operations(client_message):
         if li[10] == "null":
             li[10] = session_number
             session_number += 1
-        result = sigma(li[6])
+        result = sigma(li[6], li[10])
         czas = li[8]
         return 'oper#sumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
@@ -59,7 +61,7 @@ def run_operations(client_message):
         if li[10] == "null":
             li[10] = session_number
             session_number += 1
-        result = sigma(li[6])
+        result = sigma(li[6], li[10])
         czas = li[8]
         return 'oper#sumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
@@ -67,7 +69,7 @@ def run_operations(client_message):
         if li[8] == "null":
             li[8] = session_number
             session_number += 1
-        result = sigma(0)
+        result = sigma(0, li[8])
         given_list.clear()
         czas = li[6]
         return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
@@ -77,7 +79,7 @@ def run_operations(client_message):
             li[14] = session_number
             session_number += 1
         czas = li[12]
-        return 'oper#null@stat#failed@numb#0@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#null@stat#failed@numb#0@time#%s@ssid#%s@' % (czas, session_number)
 
     else:
         return 'oper#null@stat#failed@numb#0@'
@@ -101,7 +103,7 @@ class UDP(socketserver.BaseRequestHandler):
 
 
 if __name__ == "__main__":
-    server_address = ('127.0.0.1', 15200)
+    server_address = ('172.20.10.2', 15200)
     server_UDP = socketserver.UDPServer(server_address, UDP)
     server_UDP.serve_forever(0.5)
 

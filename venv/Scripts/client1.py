@@ -55,7 +55,7 @@ def print_help():
 if __name__ == "__main__":
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ssid = "null"
-    server_address = ('127.0.0.1', 15200)
+    server_address = ('172.20.10.2', 15200)
 
     client.settimeout(5)
 
@@ -81,6 +81,7 @@ if __name__ == "__main__":
 
         try:
             server_response = client.recvfrom(1024)
+            print(server_response[0].decode())
             ssid = get_ssid(server_response[0].decode())
             decoded  = decode_message(server_response[0].decode())
             print("\nOdpowiedź od serwera :", decoded)
