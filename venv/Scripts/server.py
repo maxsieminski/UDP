@@ -76,7 +76,7 @@ def run_operations(client_message):
             session_number += 1
             li[8] = session_number
         result = sigma(0, li[8])
-        given_list.clear()
+        given_list[int(li[8])] = 0
         czas = li[6]
         return 'oper#koniecsumowania@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
