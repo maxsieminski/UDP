@@ -79,10 +79,10 @@ def run_operations(client_message):
             session_number += 1
             li[14] = session_number
         czas = li[12]
-        return 'oper#null@stat#failed@numb#0@time#%s@ssid#%s@' % (czas, session_number)
+        return 'oper#null@stat#fail@numb#0@time#%s@ssid#%s@' % (czas, session_number)
 
     else:
-        return 'oper#null@stat#failed@numb#0@'
+        return 'oper#null@stat#fail@numb#0@'
 
 
 class UDP(socketserver.BaseRequestHandler):

@@ -23,7 +23,7 @@ def encode_msg(user_input, ssid):  # TWORZENIE NAGŁÓWKA DLA SERWERA
                        '@', 'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
     except IndexError:  # WYSYŁA NIEPOPRAWNY NAGŁÓWEK, UŻYTKOWNIK DOSTAJE ODP NIEPOPRAWNY NAGŁÓWEK
-        message = ["oper", '#', 'null', '@', "stat", '#', "failed", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
+        message = ["oper", '#', 'null', '@', "stat", '#', "fail", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
                    'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
     message = ''.join(message)
     return message
