@@ -7,19 +7,19 @@ def encode_msg(user_input, ssid):  # TWORZENIE NAGŁÓWKA DLA SERWERA
     li = re.findall(r"[\w]+", user_input)
     try:
         if li[0].isnumeric():
-            message = ["oper", '#', 'sum_add', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
+            message = ["oper", '#', 'suma', '@', "stat", '#', "null", '@', 'numb', '#', li[0], '@', 'time', '#',
                        str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
         elif li[0] == "koniecsumowania":
-            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@',
+            message = ["oper", '#', 'ends', '@', "stat", '#', "null", '@', 'time', '#', str(int(time.time())), '@',
                        "ssid", '#', ssid, '@']
 
         elif li[0] == "sumowanie":
-            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'time', '#',
+            message = ["oper", '#', li[0][:4], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'time', '#',
                        str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
         elif li[0] == "dodawanie" or "odejmowanie" or "mnozenie" or "dzielenie":
-            message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
+            message = ["oper", '#', li[0][:4], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
                        '@', 'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
     except IndexError:  # WYSYŁA NIEPOPRAWNY NAGŁÓWEK, UŻYTKOWNIK DOSTAJE ODP NIEPOPRAWNY NAGŁÓWEK
@@ -34,8 +34,18 @@ def decode_message(server_answer):  # ROZKODOWANIE NAGŁÓWKA NA WIADOMOŚĆ DLA
     if li[1] == 'null':
         return "Niepoprawny nagłówek"
     else:
-        return "Wynikiem operacji " + li[1] + " jest: " + li[5]
-
+        if li[1] == "doda":
+            return "Wynikiem operacji dodawania jest: " + li[5]
+        elif li[1] == "odej":
+            return "Wynikiem operacji odejmowania jest: " + li[5]
+        elif li[1] == "mnoz":
+            return "Wynikiem operacji mnozenia jest: " + li[5]
+        elif li[1] == "dzie":
+            return "Wynikiem operacji dzielenia jest: " + li[5]
+        elif li[1] == "sumo" or li[1] == "suma":
+            return "Wynikiem operacji sumowania jest: " + li[5]
+        else:
+            return "Wynikiem operacji sumowania jest: " + li[5] + ". Koniec sumowania."
 
 def get_ssid(server_answer):  # UZYSKUJE NUMER SSID OD SERWERA
     li = re.findall(r"[\w]+", server_answer)

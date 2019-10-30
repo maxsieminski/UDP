@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5e3af53b-fe84-4af4-9b00-2b92238245af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/client1.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/client1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/Scripts/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/server.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -139,7 +140,9 @@
       <workItem from="1571335046028" duration="284000" />
       <workItem from="1571380654081" duration="7392000" />
       <workItem from="1572423646551" duration="1037000" />
-      <workItem from="1572432280733" duration="2222000" />
+      <workItem from="1572432280733" duration="2642000" />
+      <workItem from="1572437417226" duration="221000" />
+      <workItem from="1572438048742" duration="1058000" />
     </task>
     <task id="LOCAL-00001" summary="* dodany broadcast (trzeba poprawic potwierdzenie wiadomosci, w wielu przypadkach nadaje broadcast a nie potwierdzenie)&#10;* dodano obsluge operacji matematycznych">
       <created>1571322394905</created>
@@ -225,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572434135175</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572434806683</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1572434806683</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
