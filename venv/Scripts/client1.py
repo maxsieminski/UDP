@@ -3,7 +3,7 @@ import re
 import time
 
 
-def encode_msg(user_input, ssid):
+def encode_msg(user_input, ssid):  # TWORZENIE NAGŁÓWKA DLA SERWERA
     li = re.findall(r"[\w]+", user_input)
     try:
         if li[0].isnumeric():
@@ -22,15 +22,14 @@ def encode_msg(user_input, ssid):
             message = ["oper", '#', li[0], '@', "stat", '#', "null", '@', 'numb', '#', li[1], '@', 'numb', '#', li[2],
                        '@', 'numb', '#', li[3], '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
 
-    except IndexError:
-        # musi byc w formatce #@ zeby nie wywalalo - jako operacja: null
+    except IndexError:  # WYSYŁA NIEPOPRAWNY NAGŁÓWEK, UŻYTKOWNIK DOSTAJE ODP NIEPOPRAWNY NAGŁÓWEK
         message = ["oper", '#', 'null', '@', "stat", '#', "failed", '@', 'numb', '#', '0', '@', 'numb', '#', '0', '@',
                    'numb', '#', '0', '@', 'time', '#', str(int(time.time())), '@', "ssid", '#', ssid, '@']
     message = ''.join(message)
     return message
 
 
-def decode_message(server_answer):
+def decode_message(server_answer):  # ROZKODOWANIE NAGŁÓWKA NA WIADOMOŚĆ DLA UŻYTKOWNIKA
     li = re.findall(r"[\w]+", server_answer)
     if li[1] == 'null':
         return "Niepoprawny nagłówek"
@@ -38,7 +37,7 @@ def decode_message(server_answer):
         return "Wynikiem operacji " + li[1] + " jest: " + li[5]
 
 
-def get_ssid(server_answer):
+def get_ssid(server_answer):  # UZYSKUJE NUMER SSID OD SERWERA
     li = re.findall(r"[\w]+", server_answer)
     return li[9]
 
@@ -48,14 +47,17 @@ def print_help():
           '"odejmowanie" [liczba1] [liczba2] [liczba3] - serwer oblicza różnicę trzech liczb\n'
           '"mnozenie" [liczba1] [liczba2] [liczba3] - serwer oblicza iloczyn trzech liczb\n'
           '"dzielenie" [liczba1] [liczba2] [liczba3] - serwer oblicza iloraz trzech liczb\n'
+          '"sumowanie" [liczba1] - wysyła liczbę do sumowania\n'
+          '"[liczba1]" - wysyła liczbę do sumowania\n'
+          '"koniecsumowania" - kończy sumowanie\n'
           '"exit" - zakończenie programu klienta\n'
           '"terminate" - zdalne wyłączenie serwera')
 
 
 if __name__ == "__main__":
-    client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    ssid = "null"
-    server_address = ('172.20.10.2', 15200)
+    client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  #AF_INET - RODZINA ADRESÓW IPv4
+    ssid = "null"  # DOMYŚLNY IDEN. SESJI DLA UŻYTKOWNIKA
+    server_address = (input("Wprowadz IP serwera:"), 15200)
 
     client.settimeout(5)
 
@@ -79,14 +81,12 @@ if __name__ == "__main__":
             client.sendto(encode_msg(message, ssid).encode(), server_address)
             print("...", end='')
 
-        try:
+        try:  # TRY Bo RECVFROM BLOKUJE JEŚLI NIE UZYSKA ODPOWIEDZI
             server_response = client.recvfrom(1024)
-            print(server_response[0].decode())
-            ssid = get_ssid(server_response[0].decode())
-            decoded  = decode_message(server_response[0].decode())
+            if ssid == "null":  # JEŻELI NIE MASZ PRZYPISANEJ SESJI -> USTAW Z ODPOWIEDZI
+                ssid = get_ssid(server_response[0].decode())
+            decoded = decode_message(server_response[0].decode())
             print("\nOdpowiedź od serwera :", decoded)
-
-           # print("\nOdpowiedź od serwera :", server_response[0].decode()) - poprzednia opcja
 
         except socket.timeout:
             print("Serwer nie odpowiedział, sprawdź połączenie")
