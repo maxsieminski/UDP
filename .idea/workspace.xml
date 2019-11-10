@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e3af53b-fe84-4af4-9b00-2b92238245af" name="Default Changelist" comment="* dodano nasluch broadcastu (od teraz polaczy sie z kazdym serwerem ktory nadaje, nie trzeba przypisywac IP)">
+    <list default="true" id="5e3af53b-fe84-4af4-9b00-2b92238245af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/Scripts/client1.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/client1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/Scripts/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/server.py" afterDir="false" />
@@ -26,34 +26,6 @@
     <expand />
     <select />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/venv/Scripts/client1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Scripts/server.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -64,52 +36,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/venv/Scripts/server.py" />
-        <option value="$PROJECT_DIR$/venv/Scripts/client1.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-198" />
-    <option name="y" value="-30" />
-    <option name="width" value="1890" />
-    <option name="height" value="960" />
-  </component>
   <component name="ProjectId" id="1SI9vtO4nE0ydJzftv0N2QWh6gi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="UDP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UDP" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UDP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UDP" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UDP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UDP" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
@@ -181,6 +109,16 @@
       <item itemvalue="Python.server" />
     </list>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\maxsi\AppData\Roaming\Subversion</configuration>
   </component>
@@ -201,6 +139,10 @@
       <workItem from="1571312161819" duration="11876000" />
       <workItem from="1571335046028" duration="284000" />
       <workItem from="1571380654081" duration="7392000" />
+      <workItem from="1572423646551" duration="1037000" />
+      <workItem from="1572432280733" duration="2642000" />
+      <workItem from="1572437417226" duration="221000" />
+      <workItem from="1572438048742" duration="2090000" />
     </task>
     <task id="LOCAL-00001" summary="* dodany broadcast (trzeba poprawic potwierdzenie wiadomosci, w wielu przypadkach nadaje broadcast a nie potwierdzenie)&#10;* dodano obsluge operacji matematycznych">
       <created>1571322394905</created>
@@ -223,7 +165,84 @@
       <option name="project" value="LOCAL" />
       <updated>1572007717385</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572201120526</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1572201120526</updated>
+    </task>
+    <task id="LOCAL-00005" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572361010663</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1572361010663</updated>
+    </task>
+    <task id="LOCAL-00006" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572361813394</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1572361813394</updated>
+    </task>
+    <task id="LOCAL-00007" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572361885548</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1572361885548</updated>
+    </task>
+    <task id="LOCAL-00008" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572369736508</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1572369736508</updated>
+    </task>
+    <task id="LOCAL-00009" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572370203872</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1572370203872</updated>
+    </task>
+    <task id="LOCAL-00010" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572372064469</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1572372064469</updated>
+    </task>
+    <task id="LOCAL-00011" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572372205209</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1572372205209</updated>
+    </task>
+    <task id="LOCAL-00012" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572434135174</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1572434135175</updated>
+    </task>
+    <task id="LOCAL-00013" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572434806683</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1572434806683</updated>
+    </task>
+    <task id="LOCAL-00014" summary="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne">
+      <created>1572439431683</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1572439431683</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -235,28 +254,6 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2112788" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3280142" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32978722" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32978722" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32978722" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -266,20 +263,7 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -303,34 +287,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="* dodany broadcast (trzeba poprawic potwierdzenie wiadomosci, w wielu przypadkach nadaje broadcast a nie potwierdzenie)&#10;* dodano obsluge operacji matematycznych" />
     <MESSAGE value="* dodano nasluch broadcastu (od teraz polaczy sie z kazdym serwerem ktory nadaje, nie trzeba przypisywac IP)" />
-    <option name="LAST_COMMIT_MESSAGE" value="* dodano nasluch broadcastu (od teraz polaczy sie z kazdym serwerem ktory nadaje, nie trzeba przypisywac IP)" />
+    <MESSAGE value="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne" />
+    <option name="LAST_COMMIT_MESSAGE" value="dodano:&#10;-przesyłanie pojedynczych cyfr do sumowania (tak naprawde to nie ma roznicy między &quot;sumowanie 1&quot;, a &quot;1&quot;)&#10;-operacje &quot;koniecsumowania&quot; do wyświetlenia wyniku sumować i wyczyszczenia zsumowanych wartości&#10;-odsyłanie przez serwer wartości &quot;OD#lipa@&quot; i wyświetlenie tego jako &quot;niepoprawny nagłówek mordzia&quot;&#10;-poprawki ogólne" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TS_UDP$server.coverage" NAME="server Coverage Results" MODIFIED="1570555145862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/Scripts" />
     <SUITE FILE_PATH="coverage/UDP$client1.coverage" NAME="client1 Coverage Results" MODIFIED="1571293998911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/Scripts" />
     <SUITE FILE_PATH="coverage/TS_UDP$client1.coverage" NAME="client1 Coverage Results" MODIFIED="1570548734126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/Scripts" />
     <SUITE FILE_PATH="coverage/UDP$server.coverage" NAME="server Coverage Results" MODIFIED="1571312649086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/Scripts" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/Scripts/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Scripts/client1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

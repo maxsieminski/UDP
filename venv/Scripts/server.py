@@ -1,53 +1,88 @@
 import socketserver
 import time
 import re
-
+session_number = -1
 given_list = []
-def sigma(given_num):
-    given_num = int(given_num)
-    given_list.append(given_num)
-    print(given_list[0])
-    suma = sum(given_list)
 
-    return suma
+def sigma(given_num, ssid):  # SUMOWANIE
+    try:
+        given_num = int(given_num)
+    except ValueError:
+        print("BŁĄD WARTOŚCI")
+        return given_list[int(ssid)]
+    given_list[int(ssid)] += given_num
+    return given_list[int(ssid)]
 
 
 def run_operations(client_message):
+    global session_number
     li = re.findall(r"[\w]+", client_message)
-    if li[1] == 'oper' and li[2] == 'dodawanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    if li[1] == 'oper' and li[2] == 'doda' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            session_number += 1
+            li[14] = session_number
         result = int(li[6]) + int(li[8]) + int(li[10])
-        return 'OD#%s@' % result
+        czas = li[12]
+        return 'oper#doda@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'mnozenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'mnoz' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            session_number += 1
+            li[14] = session_number
         result = int(li[6]) * int(li[8]) * int(li[10])
-        return 'OD#%s@' % result
+        czas = li[12]
+        return 'oper#mnoz@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'odejmowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'odej' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            session_number += 1
+            li[14] = session_number
         result = int(li[6]) - int(li[8]) - int(li[10])
-        return 'OD#%s@' % result
+        czas = li[12]
+        return 'oper#odej@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'dzielenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'dzie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            session_number += 1
+            li[14] = session_number
         result = int(li[6]) / int(li[8]) / int(li[10])
-        return 'OD#%s@' % result
+        czas = li[12]
+        return 'oper#dzie@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == 'numb':
-        result = sigma(li[6])
-        return 'OD#%s@' % result
+    elif li[1] == 'oper' and li[2] == 'sumo' and li[3] == 'stat' and li[5] == 'numb':
+        if li[10] == "null":
+            session_number += 1
+            li[10] = session_number
+        result = sigma(li[6], li[10])
+        czas = li[8]
+        return 'oper#sumo@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'sum_add' and li[3] == 'stat' and li[5] == 'numb':
-        result = sigma(li[6])
-        return 'OD#%s@' % result
+    elif li[1] == 'oper' and li[2] == 'suma' and li[3] == 'stat' and li[5] == 'numb':
+        if li[10] == "null":
+            session_number += 1
+            li[10] = session_number
+        result = sigma(li[6], li[10])
+        czas = li[8]
+        return 'oper#sumo@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'koniecsumowania':
-        result = sigma(0)
-        given_list.clear()
-        return 'OD#%s@' % result
+    elif li[1] == 'oper' and li[2] == 'ends':
+        if li[8] == "null":
+            session_number += 1
+            li[8] = session_number
+        result = sigma(0, li[8])
+        given_list[int(li[8])] = 0
+        czas = li[6]
+        return 'oper#ends@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'lipa' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
-        return 'OD#lipa@'
+    elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+        if li[14] == "null":
+            session_number += 1
+            li[14] = session_number
+        czas = li[12]
+        return 'oper#null@stat#fail@numb#0@time#%s@ssid#%s@' % (czas, session_number)
 
     else:
-        return 'OD#lipa@'
+        return 'oper#null@stat#fail@numb#0@'
 
 
 class UDP(socketserver.BaseRequestHandler):
@@ -68,7 +103,13 @@ class UDP(socketserver.BaseRequestHandler):
 
 
 if __name__ == "__main__":
-    server_address = ('127.0.0.1', 15200)
+
+    # ZAPELNIA LISTE SUMOWANIA, ZEBY NIE BYLA PUSTA NP
+    # JEZELI SESJA 2 CHCE SUMOWANIE, A 0 I 1 NIE UZYWALO (INDEX ERROR)
+    for x in range(10):
+        given_list.append(0)
+
+    server_address = (input("Wprowadź IP serwera: "), 15200)
     server_UDP = socketserver.UDPServer(server_address, UDP)
     server_UDP.serve_forever(0.5)
 
