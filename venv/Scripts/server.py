@@ -4,6 +4,7 @@ import re
 session_number = -1 # -1 PONIEWAŻ PRZED NADANIEM ID SESJI ZWIĘKSZA JĄ O 1 (WIĘC ZACZYNAMY OD 0)
 given_list = []
 
+
 def sigma(given_num, ssid):  # SUMOWANIE
     try:
         given_num = int(given_num)
@@ -108,4 +109,3 @@ if __name__ == "__main__":
     server_address = (input("Wprowadź IP serwera: "), 15200)
     server_UDP = socketserver.UDPServer(server_address, UDP)
     server_UDP.serve_forever(0.5)
-
