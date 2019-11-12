@@ -1,7 +1,7 @@
 import socketserver
 import time
 import re
-session_number = -1
+session_number = -1 # -1 PONIEWAŻ PRZED NADANIEM ID SESJI ZWIĘKSZA JĄ O 1 (WIĘC ZACZYNAMY OD 0)
 given_list = []
 
 def sigma(given_num, ssid):  # SUMOWANIE
@@ -14,91 +14,87 @@ def sigma(given_num, ssid):  # SUMOWANIE
     return given_list[int(ssid)]
 
 
-def run_operations(client_message):
+def run_operations(client_message): # TWORZY ODPOWIEDŹ DLA ODPOWIEDNIEJ OPERACJI, JEŻELI NIE MA NUMERU SESJI
+                                    # PROGRAM PRZYPISUJE JĄ DLA KLIENTA I ZWIĘKSZA O 1 ABY NADAĆ NASTĘPNEMU
     global session_number
     li = re.findall(r"[\w]+", client_message)
-    if li[1] == 'oper' and li[2] == 'doda' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    if li[1] == 'oper' and li[2] == 'dodawanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb': # DODAWANIE
         if li[14] == "null":
             session_number += 1
             li[14] = session_number
         result = int(li[6]) + int(li[8]) + int(li[10])
         czas = li[12]
-        return 'oper#doda@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#dodawanie@stat#ok@numb#%s@time#%s@iden#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'mnoz' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'mnozenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb': # MNOŻENIE
         if li[14] == "null":
             session_number += 1
             li[14] = session_number
         result = int(li[6]) * int(li[8]) * int(li[10])
         czas = li[12]
-        return 'oper#mnoz@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#mnozenie@stat#ok@numb#%s@time#%s@iden#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'odej' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'odejmowanie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb': # ODEJMOWANIE
         if li[14] == "null":
             session_number += 1
             li[14] = session_number
         result = int(li[6]) - int(li[8]) - int(li[10])
         czas = li[12]
-        return 'oper#odej@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#odejmowanie@stat#ok@numb#%s@time#%s@iden#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'dzie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'dzielenie' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb': # DZIELENIE
         if li[14] == "null":
             session_number += 1
             li[14] = session_number
-        result = int(li[6]) / int(li[8]) / int(li[10])
+        try:
+            result = int(li[6]) / int(li[8]) / int(li[10])
+        except ZeroDivisionError:
+            result = 'Błąd'
         czas = li[12]
-        return 'oper#dzie@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#dzielenie@stat#ok@numb#%s@time#%s@iden#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'sumo' and li[3] == 'stat' and li[5] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'sumowanie' and li[3] == 'stat' and li[5] == 'numb': # SUMOWANIE
         if li[10] == "null":
             session_number += 1
             li[10] = session_number
         result = sigma(li[6], li[10])
         czas = li[8]
-        return 'oper#sumo@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#sumowanie@stat#ok@numb#%s@time#%s@iden#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'suma' and li[3] == 'stat' and li[5] == 'numb':
-        if li[10] == "null":
-            session_number += 1
-            li[10] = session_number
-        result = sigma(li[6], li[10])
-        czas = li[8]
-        return 'oper#sumo@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
-
-    elif li[1] == 'oper' and li[2] == 'ends':
+    elif li[1] == 'oper' and li[2] == 'endsumowanie': # KONIEC SUMOWANIA
         if li[8] == "null":
             session_number += 1
             li[8] = session_number
         result = sigma(0, li[8])
         given_list[int(li[8])] = 0
         czas = li[6]
-        return 'oper#ends@stat#ok@numb#%s@time#%s@ssid#%s@' % (result, czas, session_number)
+        return 'oper#endsumowanie@stat#ok@numb#%s@time#%s@iden#%s@' % (result, czas, session_number)
 
-    elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb':
+    elif li[1] == 'oper' and li[2] == 'null' and li[3] == 'stat' and li[5] == li[7] == li[9] == 'numb': # BŁĄD
         if li[14] == "null":
             session_number += 1
             li[14] = session_number
         czas = li[12]
-        return 'oper#null@stat#fail@numb#0@time#%s@ssid#%s@' % (czas, session_number)
+        return 'oper#null@stat#fail@numb#0@time#%s@iden#%s@' % (czas, session_number)
 
     else:
-        return 'oper#null@stat#fail@numb#0@'
+        return 'oper#null@stat#fail@numb#0@time#%s@iden#%s@' % (czas, session_number) # BŁĄD OGÓLNY
 
 
 class UDP(socketserver.BaseRequestHandler):
     def handle(self):
-        msg_from_client = self.request[0].strip()
+        msg_from_client = self.request[0].strip() # ROZKODOWANIE WIADOMOŚCI
         socket = self.request[1]
-        client_add = self.client_address[0]
+        client_add = self.client_address[0] # ROZKODOWANIE ADRESU KLIENTA
 
-        if msg_from_client.decode() == 'terminate':
+        if msg_from_client.decode() == 'terminate': # ZDALNE ZAKOŃCZENIE DZIAŁANIA SERWERA
             print("ZDALNE ZAMKNIECIE SERWERA PRZEZ KLIENTA")
             exit(0)
 
         else:
-            print("Wiadomość od", client_add, ":", msg_from_client.decode())
+            print("Wiadomość od", client_add, ":", msg_from_client.decode()) # DRUKUJE WIADOMOŚĆ JEŚLI NIE JEST TERMINATE
 
-        server_response = run_operations(str(msg_from_client))
+        server_response = run_operations(str(msg_from_client)) # WYSYŁA ODPOWIEDŹ DLA ODPOWIEDNIEJ OPERACJI
         socket.sendto(server_response.encode(), self.client_address)
 
 
